@@ -1,0 +1,46 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div id="add-product-view" class="container">
+  <div class="row">
+    <h1 ng-if="!isEditMode()">Add Product</h1>
+    <h1 ng-if="isEditMode()">Edit Product: {{editProductName}}</h1>
+  </div>
+  
+  <div class="row">
+    <form name="form" ng-submit="submit(form)" novalidate>
+      <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted, 'has-error': form.name.$invalid && submitted }">
+        <label for="inputName">Name</label>
+        <input id="inputName" type="text" class="form-control" placeholder="Name" ng-model="product.name" name="name" required mongoose-error />
+        <p class="help-block" ng-show="form.name.$error.mongoose && submitted">{{ errors.name }}</p>
+        <p class="help-block" ng-show="form.name.$error.required && submitted">A name is required</p>        
+      </div>
+
+      <div class="form-group" ng-class="{ 'has-success': form.description.$valid && submitted, 'has-error': form.description.$invalid && submitted }">
+        <label for="inputDescription">Description</label>
+        <textarea id="inputDescription" class="form-control" name="description" placeholder="Description" ng-model="product.description" rows="3" required mongoose-error></textarea>
+        <p class="help-block" ng-show="form.description.$error.mongoose && submitted">{{ errors.description }}</p>
+        <p class="help-block" ng-show="form.description.$error.required && submitted">A description is required</p>                
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-success': form.price.$valid && submitted, 'has-error': form.price.$invalid && submitted }">
+        <label for="inputPrice">Price</label>                
+        <div class="input-group">
+          <div class="input-group-addon">$</div>
+          <input id="inputPrice" type="text" name="price" class="form-control" ng-model="product.price" placeholder="Amount" required mongoose-error />
+        </div>
+        <p class="help-block" ng-show="form.price.$error.mongoose && submitted">{{ errors.price }}</p>
+        <p class="help-block" ng-show="form.price.$error.required && submitted">A price is required</p>   
+      </div>
+            
+      <button type="submit" class="btn btn-primary">Save</button>
+      
+      <a ng-if="isEditMode()" ng-click="delete()" class="btn btn-danger">Delete</a>
+    </form>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+      
+  </div>
+</footer>

@@ -1,0 +1,44 @@
+#instagram-view .gallery {
+	list-style: none;
+	padding: 0;
+}
+
+#instagram-view .gallery li {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+#instagram-view .gallery li .control {
+  display: none;
+  line-height: 50px;
+  text-decoration: none;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+#instagram-view .gallery li:hover .control {
+  display: block;
+}
+
+#instagram-view .gallery li .control.like {
+  font-size: 24px;
+  color: #f99;
+}
+
+#instagram-view .gallery li .control.unlike {
+  font-size: 18px;
+  color: #bb2;
+}
+
+#instagram-view .gallery .photo-thumbnail {
+    width: 100%;
+    height: 100%;
+}

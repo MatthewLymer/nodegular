@@ -1,0 +1,39 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div id="products-view" class="container">
+  <div class="row">
+    <h1>Products</h1>
+  </div>
+  
+  <div class="row" ng-show="isAdmin()">
+    <a class="btn btn-default btn-lg" href="/products/add">Add Product</a>
+  </div>
+  
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th ng-if="isAdmin()">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="product in products">
+          <td><a ng-href="/products/view/{{product.id}}">{{product.name}}</a></td>          
+          <td>{{product.price}}</td>
+          <td ng-if="isAdmin()"><a ng-href="/products/edit/{{product.id}}">Edit</a></td>
+        </tr>
+        <tr ng-hide="products.length">
+          <td colspan="3">There are no products</td>
+        </tr>
+      </tbody>
+    </table>    
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+      
+  </div>
+</footer>

@@ -1,0 +1,73 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div id="view-product-view" class="container">
+  <div class="row">
+    <h1>{{product.name}}</h1>
+  </div>
+  
+  <div class="row">
+    <p>{{product.description}}</p>
+  </div>
+
+  <div class="row">
+    <h2>Comments</h2>
+    
+    <p ng-hide="comments.length">
+      There are no comments, be the first!
+    </p>
+    
+    <div ng-repeat="comment in comments">
+      <blockquote>
+        <p>{{comment.message}}</p>
+        <footer><cite>{{comment.name}}</cite> <a href="javascript:;" ng-click="deleteComment(comment)" ng-show="isAdmin()">Delete</a></footer>
+      </blockquote>
+    </div>
+  </div>
+  
+  <div class="row">
+    <h3>Post a comment</h3>
+        
+    <form name="form" ng-submit="addComment(form)" novalidate>
+      <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted, 'has-error': form.name.$invalid && submitted }">
+        <label for="inputName">Name</label>
+        <input id="inputName" type="text" class="form-control" placeholder="Name" ng-model="comment.name" name="name" required mongoose-error />
+        <p class="help-block" ng-show="form.name.$error.mongoose && submitted">{{ errors.name }}</p>
+        <p class="help-block" ng-show="form.name.$error.required && submitted">A name is required</p>        
+      </div>
+
+      <div class="form-group" ng-class="{ 'has-success': form.message.$valid && submitted, 'has-error': form.message.$invalid && submitted }">
+        <label for="inputMessage">Message</label>
+        <textarea id="inputMessage" class="form-control" name="message" placeholder="Message" ng-model="comment.message" rows="3" required mongoose-error></textarea>
+        <p class="help-block" ng-show="form.message.$error.mongoose && submitted">{{ errors.message }}</p>
+        <p class="help-block" ng-show="form.message.$error.required && submitted">A message is required</p>                
+      </div>
+
+      <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+  </div>
+  
+  <div class="row" ng-show="product.priceHistory">
+    <h2>Price History</h2>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="history in product.priceHistory">
+          <td>{{history.date}}</td>
+          <td>{{history.amount}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  
+</div>
+
+<footer class="footer">
+  <div class="container">
+      
+  </div>
+</footer>
